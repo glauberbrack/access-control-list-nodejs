@@ -31,5 +31,8 @@ An API with Access Controler List (ACL), where we work with roles and permission
 
 ```json
 {
+    "name": "Glauber",
+    "username": "glauberbrack",
+    "password": "secret-pass"
 }
 ```
