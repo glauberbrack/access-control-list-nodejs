@@ -6,6 +6,9 @@
     "username": "postgres",
     "password": "0000",
     "database": "acl-nodejs",
+    "entities": [
+        "./src/models/*.ts"
+    ],
     "migrations": [
         "./src/database/migrations/*.ts"
     ],
