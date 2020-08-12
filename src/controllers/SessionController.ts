@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { getCustomRepository } from 'typeorm';
 import { compare } from 'bcryptjs';
+import { sign } from 'jsonwebtoken';
 
 import UserRepository from '../repositories/UserRepository';
 
@@ -23,7 +24,15 @@ class SessionController {
             return response.status(400).json({ error: 'Verify your credentials '});
         };
 
-        
+        const token = sign({}, '87b9ee9a5ad501dc7433575162a89e8c', {
+            subject: user.id,
+            expiresIn: '1d'
+        });
+
+        return response.json({
+            token,
+            user
+        });
     }
 }
 
