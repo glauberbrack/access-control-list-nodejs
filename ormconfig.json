@@ -8,7 +8,7 @@
     "migrations": [
         "./src/database/migrations/*.ts"
     ],
-    "cli": [
-        "./src/database/migrations"
-    ]
+    "cli": {
+        "migrationsDir": "./src/database/migrations"
+    }
 }
