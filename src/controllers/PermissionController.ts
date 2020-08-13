@@ -9,6 +9,7 @@ class PermissionController {
         const permissionRepository = getCustomRepository(PermissionRepository);
 
         const { name, description } = request.body;
+        console.log(name, description)
 
         const permissionExists = await permissionRepository.findOne({ name })
 
