@@ -46,7 +46,8 @@ An API with Access Controler List (ACL), where we work with roles and permission
 ```json
 {
     "username": "glauberbrack",
-    "password": "secret-pass"
+    "password": "secret-pass",
+    "roles": [":roles-id", ":roles-id"]
 }
 ```
 
@@ -71,7 +72,32 @@ An API with Access Controler List (ACL), where we work with roles and permission
 
 ```json
 {
-    "username": "admin",
-    "description": "System administrator"
+    "name": "admin",
+    "description": "System administrator",
+    "permissions": [":permission-id", ":permission-id"]
 }
 ```
+
+## PRODUCTS
+
+`GET /products`
+
+#### :warning: To use the next routes, the user MUST be authenticated
+
+`POST /products`
+
+#### Body example:
+
+```json
+{
+    "name": "Computer",
+    "description": "An incredible new computer"
+}
+```
+
+`GET /products/:id`
+
+
+---
+
+Glauber Brack - <a href="mailto:glauber@brack.com.br?Subject=Hello%20you">Talk to me!</a> ☕
