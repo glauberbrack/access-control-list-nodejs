@@ -36,3 +36,16 @@ An API with Access Controler List (ACL), where we work with roles and permission
     "password": "secret-pass"
 }
 ```
+
+## AUTHENTICATION
+
+`POST /sessions`
+
+#### Body example:
+
+```json
+{
+    "username": "glauberbrack",
+    "password": "secret-pass"
+}
+```
