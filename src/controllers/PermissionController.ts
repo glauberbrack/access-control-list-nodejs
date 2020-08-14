@@ -22,7 +22,7 @@ class PermissionController {
             description
         });
 
-        permissionRepository.save(permission);
+        await permissionRepository.save(permission);
 
         return response.status(201).json(permission);
     }
