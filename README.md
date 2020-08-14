@@ -49,3 +49,29 @@ An API with Access Controler List (ACL), where we work with roles and permission
     "password": "secret-pass"
 }
 ```
+
+## PERMISSIONS
+
+`POST /permissions`
+
+#### Body example:
+
+```json
+{
+    "name": "create-post",
+    "description": "Allows user to create a new post"
+}
+```
+
+## ROLES
+
+`POST /roles`
+
+#### Body example:
+
+```json
+{
+    "username": "admin",
+    "description": "System administrator"
+}
+```
