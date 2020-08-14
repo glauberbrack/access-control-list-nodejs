@@ -26,7 +26,7 @@ class User {
         inverseJoinColumns: [{ name: 'role_id' }]
     })
     
-    role: Role[];
+    roles: Role[];
 
 
 }

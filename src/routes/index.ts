@@ -1,5 +1,7 @@
 import { Router } from 'express';
 
+import { is } from '../middlewares/permission';
+
 import UserController from '../controllers/UserController';
 import SessionController from '../controllers/SessionController';
 import PermissionController from '../controllers/PermissionController';
@@ -22,8 +24,8 @@ routes.post('/sessions', sessionController.store);
 
 // PRODUCTS
 routes.get('/products', productController.index);
-routes.post('/products', productController.store);
-routes.get('/products/:id', productController.show);
+routes.post('/products', is(['admin']), productController.store);
+routes.get('/products/:id', is(['admin']), productController.show);
 
 // PERMISSIONS
 routes.post('/permissions', permissionController.store);

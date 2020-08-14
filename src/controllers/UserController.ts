@@ -27,7 +27,7 @@ class UserController {
             name,
             username,
             password: passwordHashed,
-            role: roleExists
+            roles: roleExists
         });
 
         await userRepository.save(user);

@@ -1,38 +1,44 @@
-import { Request, Response, NextFunction } from 'express';
-import { decode } from 'jsonwebtoken';
-import { getCustomRepository } from 'typeorm';
-
-import User from '../models/User';
-import UserRepository from '../repositories/UserRepository';
+import { Request, Response, NextFunction } from "express";
+import { decode } from "jsonwebtoken";
+import { getCustomRepository } from "typeorm";
+import UserRepository from "../repositories/UserRepository";
+import User from "../models/User";
 
 async function decoder(request: Request): Promise<User | undefined> {
-    const authHeader = request.headers.authorization || "";
-    const userRepository = getCustomRepository(UserRepository);
-    
-    const [ , token] = authHeader?.split(" ");
+  const authHeader = request.headers.authorization || "";
+  const userRepository = getCustomRepository(UserRepository);
 
-    const payload = decode(token);
+  const [, token] = authHeader?.split(" ");
 
-    const user = await userRepository.findOne(payload?.sub, { relations: ['roles']} )
+  const payload = decode(token);
 
-    return user;
+  const user = await userRepository.findOne(payload?.sub, {
+    relations: ["roles"],
+  });
+
+  return user;
 }
 
- function is(role: String[]) {
-    
-    const roleAuthorized = async (request: Request, response: Response, next: NextFunction) => {
-        const user = await decoder(request)
-        
-        const userRoles = user?.role.map( role => role.name);
+function is(role: String[]) {
+  const roleAuthorized = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ) => {
+    const user = await decoder(request);
 
-        const existsRoles = userRoles?.some( r => r.includes(r));
+    const userRoles = user?.roles.map((role) => role.name);
 
-        if(existsRoles) {
-            return next;
-        };
+    const existsRoles = userRoles?.some((r) => role.includes(r));
 
-        return response.status(401).json({ message: `You're not allowed to access this area.` });
-    };
+    if (existsRoles) {
+      return next();
+    }
 
-    return roleAuthorized;
+    return response.status(401).json({ message: "Not authorized!" });
+  };
+
+  return roleAuthorized;
 }
+
+export { is };
